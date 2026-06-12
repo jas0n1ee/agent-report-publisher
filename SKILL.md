@@ -19,7 +19,7 @@ The helper prints `LOCAL_PATH`, `RELATIVE_PATH`, and `URL` when `AGENT_REPORT_PU
 
 ## Runtime Contract
 
-- Report root: `/srv/agent-report-publisher`
+- Report root: `/srv/agent-reports`
 - Local origin: `http://127.0.0.1:8080`
 - Compose file: `scripts/compose.yaml` in this skill directory
 - Scripts: `scripts/`
@@ -45,8 +45,8 @@ Do not store the real tunnel token in this skill directory. Host environment exp
 Storage layout:
 
 ```text
-/srv/agent-report-publisher/YYYY-MM-DD/<128-bit-random-id>.html
-/srv/agent-report-publisher/YYYY-MM-DD/<128-bit-random-id>/index.html
+/srv/agent-reports/YYYY-MM-DD/<128-bit-random-id>.html
+/srv/agent-reports/YYYY-MM-DD/<128-bit-random-id>/index.html
 ```
 
 Do not create public index pages, `latest.html`, predictable filenames, or directory listings unless explicitly requested.
@@ -58,9 +58,9 @@ scripts/install_agent_report_publisher_nginx.sh
 ```
 
 ```text
-/etc/nginx/sites-available/agent-report-publisher
-/etc/nginx/sites-enabled/agent-report-publisher
-/srv/agent-report-publisher/
+/etc/nginx/sites-available/agent-reports
+/etc/nginx/sites-enabled/agent-reports
+/srv/agent-reports/
 ```
 
 Cloudflare Tunnel route:
@@ -88,4 +88,4 @@ docker compose -p agent-report-publisher -f scripts/compose.yaml ps
 docker compose -p agent-report-publisher -f scripts/compose.yaml logs --tail=80
 ```
 
-If Nginx returns `404`, check the file path under `/srv/agent-report-publisher`. `403` on a directory is expected when no `index.html` exists.
+If Nginx returns `404`, check the file path under `/srv/agent-reports`. `403` on a directory is expected when no `index.html` exists.

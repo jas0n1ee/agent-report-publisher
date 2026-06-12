@@ -8,12 +8,12 @@ Usage:
   publish_agent_report.sh /path/to/report_bundle_dir
 
 Environment:
-  AGENT_REPORT_PUBLISHER_ROOT=/srv/agent-report-publisher
+  AGENT_REPORT_PUBLISHER_ROOT=/srv/agent-reports
   AGENT_REPORT_PUBLISHER_PUBLIC_BASE_URL=https://reports.example.com
 
 Behavior:
-  - File input is copied to /srv/agent-report-publisher/YYYY-MM-DD/<random>.html
-  - Directory input must contain index.html and is copied to /srv/agent-report-publisher/YYYY-MM-DD/<random>/
+  - File input is copied to /srv/agent-reports/YYYY-MM-DD/<random>.html
+  - Directory input must contain index.html and is copied to /srv/agent-reports/YYYY-MM-DD/<random>/
   - Prints LOCAL_PATH and URL when AGENT_REPORT_PUBLISHER_PUBLIC_BASE_URL is set.
 USAGE
 }
@@ -29,7 +29,7 @@ if ! command -v openssl >/dev/null 2>&1; then
 fi
 
 SRC="$1"
-REPORT_ROOT="${AGENT_REPORT_PUBLISHER_ROOT:-/srv/agent-report-publisher}"
+REPORT_ROOT="${AGENT_REPORT_PUBLISHER_ROOT:-/srv/agent-reports}"
 PUBLIC_BASE="${AGENT_REPORT_PUBLISHER_PUBLIC_BASE_URL:-}"
 DATE="$(date +%F)"
 ID="$(openssl rand -hex 16)"
