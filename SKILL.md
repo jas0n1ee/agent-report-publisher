@@ -24,7 +24,7 @@ The helper prints `LOCAL_PATH`, `RELATIVE_PATH`, and `URL` when `AGENT_REPORT_PU
 - Compose file: `scripts/compose.yaml` in this skill directory
 - Scripts: `scripts/`
 
-Machine-specific values must come from the host environment, such as `~/.bashrc`, `~/.profile`, or a systemd environment file:
+Before using this skill, the human/operator must configure machine-specific values in the host environment, such as `~/.bashrc`, `~/.profile`, or a systemd environment file:
 
 ```bash
 export TUNNEL_TOKEN="<Cloudflare Tunnel token>"
