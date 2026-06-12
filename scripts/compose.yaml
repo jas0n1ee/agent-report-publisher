@@ -1,0 +1,18 @@
+services:
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: cloudflared-agent-report-publisher
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      # Required. Set in the host environment, for example from .bashrc.
+      TUNNEL_TOKEN: ${TUNNEL_TOKEN:?Set TUNNEL_TOKEN in the host environment}
+
+      # Optional. Use "http2" only if UDP/7844 is blocked and auto fallback is unreliable.
+      TUNNEL_TRANSPORT_PROTOCOL: ${TUNNEL_TRANSPORT_PROTOCOL:-auto}
+
+      # Optional logging controls.
+      TUNNEL_LOGLEVEL: ${TUNNEL_LOGLEVEL:-info}
+      NO_AUTOUPDATE: "true"
+
+    command: tunnel --no-autoupdate run
